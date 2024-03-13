@@ -61,7 +61,45 @@ def Onclickstart():
 
     win.mainloop()
     return
+def time():
+        def choice():
+            def calculation(inp,unit_in,unit_out):
+                SI = {'nanosecond [ns]':10**(-9), 'microsecond [μs]':10**(-6), 'millisecond [ms]':10**(-3), 'second [s]':1, 'minute [min]':60, 'hour [h]':3600, 'day':3600*24, 'week':3600*24*7}
+                return inp*SI[unit_in]/SI[unit_out]
+            
+            inp = float(e1.get())
+            unit_in = inputf.get()
+            unit_out = inputt.get()
+            result = calculation(inp,unit_in,unit_out)
+            e2.delete(0,END)
+            e2.insert(0,result)
+            
+        time = ttk.Frame(tabControl)
+        tabControl.add(time, text='Time')
+        
+        options = ['nanosecond [ns]', 'microsecond [μs]', 'millisecond [ms]', 'second [s]', 'minute [min]', 'hour [h]', 'day', 'week']
 
+        inputf = StringVar()
+        inputf.set(options[5])
+        dropdownf = OptionMenu(time,inputf,*options)
+        
+        inputt = StringVar()
+        inputt.set(options[3])
+        dropdownt = OptionMenu(time,inputt,*options)
+        
+        ttk.Label(time, text='Input: ').grid(row=0)
+        e1 = Entry(time)
+        e1.grid(row=0, column=1)
+        dropdownf.grid(row=0, column=2)
+        
+        ttk.Label(time, text='Result: ').grid(row=1)
+        e2 = Entry(time)
+        e2.grid(row=1, column=1)
+        dropdownt.grid(row=1, column=2)    
+
+        okbtn = Button(time, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
+        okbtn.grid(row=2, column=1)
+        return
 
 if __name__ == "__main__":
     wind = tk.Tk()
