@@ -49,6 +49,51 @@ def Onclickstart():
         okbtn.grid(row=2, column=1)
         return
 
+    def mass():
+        def choice():
+            def calculation(inp, unit_in, unit_out):
+                SI = {'microgram [μg]': 10 ** (-9), 'milligram [mg]': 10 ** (-6), 'gram [g]': 10 ** (-3),
+                      'kilogram [kg]': 1, 'tonne [t]': 10 ** 3, 'ounce [oz]': 0.0283495, 'pound [lb]': 0.453592,
+                      'US ton': 907.185}
+                return inp * SI[unit_in] / SI[unit_out]
+
+            inp = float(e1.get())
+            unit_in = inputf.get()
+            unit_out = inputt.get()
+            result = calculation(inp, unit_in, unit_out)
+            e2.delete(0, END)
+            e2.insert(0, result)
+
+        mass = ttk.Frame(tabControl)
+        tabControl.add(mass, text='Mass')
+
+        options = ['microgram [μg]', 'milligram [mg]', 'gram [g]', 'kilogram [kg]', 'tonne [t]', 'ounce [oz]',
+                   'pound [lb]', 'US ton']
+
+        inputf = StringVar()
+        inputf.set(options[3])
+        dropdownf = OptionMenu(mass, inputf, *options)
+
+        inputt = StringVar()
+        inputt.set(options[6])
+        dropdownt = OptionMenu(mass, inputt, *options)
+
+        ttk.Label(mass, text='Input: ').grid(row=0)
+        e1 = Entry(mass)
+        e1.grid(row=0, column=1)
+        dropdownf.grid(row=0, column=2)
+
+        ttk.Label(mass, text='Result: ').grid(row=1)
+        e2 = Entry(mass)
+        e2.grid(row=1, column=1)
+        dropdownt.grid(row=1, column=2)
+
+        okbtn = Button(mass, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light', 8, 'bold'),
+                       command=choice)
+        okbtn.grid(row=2, column=1)
+        return
+
+
     def time():
         def choice():
             def calculation(inp,unit_in,unit_out):
@@ -206,6 +251,10 @@ def Onclickstart():
     tabControl.pack(expand=1, fill='both')
     length()
     time()
+    speed()
+    temperature()
+    mass()
+
 
     win.mainloop()
     return
