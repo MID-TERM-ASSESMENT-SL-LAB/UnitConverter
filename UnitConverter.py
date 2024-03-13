@@ -88,7 +88,61 @@ def Onclickstart():
         okbtn = Button(time, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
         okbtn.grid(row=2, column=1)
         return
+    def speed():
+        def choice():
+            def calculation(inp, length_in, time_in, length_out, time_out):
+                SIlength = {'centimeter [cm]':10**(-2), 'meter [m]':1, 'kilometer [km]':10**3, 'inch [in]':0.0254, 'foot [ft]':0.3048, 'mile [mi]':1609.34}
+                SItime = {'second [s]':1, 'minute [min]':60, 'hour [h]':3600}
+                return inp*(SIlength[length_in]/SItime[time_in])/(SIlength[length_out]/SItime[time_out])
+            
+            inp = float(e1.get())
+            length_in = lengthf.get()
+            time_in = timef.get()
+            length_out = lengtht.get()
+            time_out = timet.get()
+            result = calculation(inp, length_in, time_in, length_out, time_out)
+            e2.delete(0,END)
+            e2.insert(0,result)
+            
+        speed = ttk.Frame(tabControl)
+        tabControl.add(speed, text='Speed') 
+    
+        lengthoptions = ['centimeter [cm]', 'meter [m]', 'kilometer [km]', 'inch [in]', 'foot [ft]', 'mile [mi]']
+        timeoptions = ['second [s]', 'minute [min]', 'hour [h]']
 
+        lengthf = StringVar()
+        lengthf.set(lengthoptions[5])
+        lengthdropf = OptionMenu(speed,lengthf,*lengthoptions)
+
+        timef = StringVar()
+        timef.set(timeoptions[2])
+        timedropf = OptionMenu(speed,timef,*timeoptions)
+        
+        lengtht = StringVar()
+        lengtht.set(lengthoptions[2])
+        lengthdropt = OptionMenu(speed,lengtht,*lengthoptions)
+
+        timet = StringVar()
+        timet.set(timeoptions[2])
+        timedropt = OptionMenu(speed,timet,*timeoptions)
+
+        ttk.Label(speed, text='Input: ').grid(row=0)   
+        e1 = Entry(speed)
+        e1.grid(row=0, column=1)
+        lengthdropf.grid(row=0, column=2)
+        ttk.Label(speed, text='/').grid(row=0, column=3)
+        timedropf.grid(row=0, column=4)
+        
+        ttk.Label(speed, text='Result: ').grid(row=1)  
+        e2 = Entry(speed)
+        e2.grid(row=1, column=1)
+        lengthdropt.grid(row=1, column=2)
+        ttk.Label(speed, text='/').grid(row=1, column=3)
+        timedropt.grid(row=1, column=4)      
+        
+        okbtn = Button(speed, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
+        okbtn.grid(row=2, column=1)
+        return
     win = Toplevel()
     win.deiconify()
     win.resizable(0, 0)
