@@ -143,6 +143,59 @@ def Onclickstart():
         okbtn = Button(speed, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
         okbtn.grid(row=2, column=1)
         return
+    def temperature():
+        def choice():
+            inp = float(e1.get())
+            unit_in = inputf.get()
+            unit_out = inputt.get()
+            if unit_in != unit_out:
+                if unit_in == 'Celsius [C]':
+                    if unit_out == 'Fahrenheit [F]':
+                        result = (inp*9/5)+32
+                    else:
+                        result = inp+273.15
+                elif unit_in == 'Fahrenheit [F]':
+                    if unit_out == 'Celsius [C]':
+                        result = (inp-32)*5/9
+                    else:
+                        result = (inp-32)*5/9+273.15
+                else:
+                    if unit_out == 'Fahrenheit [F]':
+                        result = (inp-(273.15))*9/5+32
+                    else:
+                        result = inp-273.15
+            else:
+                result = inp
+
+            e2.delete(0,END)
+            e2.insert(0,result)
+            
+        temperature = ttk.Frame(tabControl)
+        tabControl.add(temperature, text='Temperature')
+        
+        options = ['Celsius [C]', 'Fahrenheit [F]', 'Kelvin [K]']
+
+        inputf = StringVar()
+        inputf.set(options[0])
+        dropdownf = OptionMenu(temperature,inputf,*options)
+
+        inputt = StringVar()
+        inputt.set(options[1])
+        dropdownt = OptionMenu(temperature,inputt,*options)
+        
+        ttk.Label(temperature, text='Input: ').grid(row=0)
+        e1 = Entry(temperature)
+        e1.grid(row=0, column=1)
+        dropdownf.grid(row=0, column=2)
+        
+        ttk.Label(temperature, text='Result: ').grid(row=1)
+        e2 = Entry(temperature)
+        e2.grid(row=1, column=1)
+        dropdownt.grid(row=1, column=2)
+        
+        okbtn = Button(temperature, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
+        okbtn.grid(row=2, column=1)
+        return
     win = Toplevel()
     win.deiconify()
     win.resizable(0, 0)
