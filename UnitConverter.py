@@ -49,19 +49,7 @@ def Onclickstart():
         okbtn.grid(row=2, column=1)
         return
 
-    win = Toplevel()
-    win.deiconify()
-    win.resizable(0, 0)
-    win.geometry('480x270')
-    win.configure(bg='#008080')
-    win.title('Unit Converter')
-    tabControl = ttk.Notebook(win)
-    tabControl.pack(expand=1, fill='both')
-    length()
-
-    win.mainloop()
-    return
-def time():
+    def time():
         def choice():
             def calculation(inp,unit_in,unit_out):
                 SI = {'nanosecond [ns]':10**(-9), 'microsecond [μs]':10**(-6), 'millisecond [ms]':10**(-3), 'second [s]':1, 'minute [min]':60, 'hour [h]':3600, 'day':3600*24, 'week':3600*24*7}
@@ -100,6 +88,21 @@ def time():
         okbtn = Button(time, bg='#C51A4A', fg='#FFFFFF', text='Convert', font=('Footlight MT Light',8,'bold'), command=choice)
         okbtn.grid(row=2, column=1)
         return
+
+    win = Toplevel()
+    win.deiconify()
+    win.resizable(0, 0)
+    win.geometry('480x270')
+    win.configure(bg='#008080')
+    win.title('Unit Converter')
+    tabControl = ttk.Notebook(win)
+    tabControl.pack(expand=1, fill='both')
+    length()
+    time()
+
+    win.mainloop()
+    return
+
 
 if __name__ == "__main__":
     wind = tk.Tk()
